@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<beans>
+		<!-- setup parameters !!!WARNING!!! Do not put parameters with same name
+			property into same parameter container -->
+		<bean id="swsharpntext" class="hr.fer.zesoi.swsharp.parameters.TextParameter"
+			scope="prototype">
+			<property name="displayName" value="Input text" />
+			<property name="name" value="text" />
+		</bean>
+		<bean id="swsharpni" class="hr.fer.zesoi.swsharp.parameters.FileParameter"
+			scope="prototype">
+			<property name="displayName" value="Input fasta query file" />
+			<property name="name" value="swsharpni" />
+			<property name="commandArgumentName" value="-i" />
+		</bean>
+		<bean id="swsharpnj" class="hr.fer.zesoi.swsharp.parameters.FileParameter"
+			scope="prototype">
+			<property name="displayName" value="Input fasta target file" />
+			<property name="name" value="swsharpnj" />
+			<property name="commandArgumentName" value="-j" />
+		</bean>
+
+		<!-- setup parameter containers -->
+		<bean id="swsharpnparams" class="hr.fer.zesoi.swsharp.parameters.ParameterContainer"
+			scope="prototype">
+			<property name="parameters">
+				<list>
+					<ref bean="swsharpni" />
+					<ref bean="swsharpnj" />
+				</list>
+			</property>
+		</bean>
+		<bean id="swsharpcparams" class="hr.fer.zesoi.swsharp.parameters.ParameterContainer"
+			scope="prototype">
+			<property name="parameters">
+				<list>
+					<ref bean="swsharpntext" />
+				</list>
+			</property>
+		</bean>
+		<bean id="swsharppparams" class="hr.fer.zesoi.swsharp.parameters.ParameterContainer"
+			scope="prototype">
+			<property name="parameters">
+				<list>
+					<ref bean="swsharpni" />
+				</list>
+			</property>
+		</bean>
+
+
+		<!-- setup modules -->
+		<bean id="swsharpn" class="hr.fer.zesoi.swsharp.modules.Module"
+			scope="prototype">
+			<property name="displayName" value="sw#n" />
+			<property name="name" value="swsharpn" />
+			<property name="parameterContainer">
+				<ref bean="swsharpnparams" />
+			</property>
+			<property name="path" value="swsharpn" />
+		</bean>
+		<bean id="swsharpc" class="hr.fer.zesoi.swsharp.modules.Module"
+			scope="prototype">
+			<property name="displayName" value="sw#c" />
+			<property name="name" value="swsharpc" />
+			<property name="parameterContainer">
+				<ref bean="swsharpcparams" />
+			</property>
+			<property name="path" value="/home/data/swsharp/swsharpn/swsharpn" />
+		</bean>
+		<bean id="swsharpp" class="hr.fer.zesoi.swsharp.modules.Module"
+			scope="prototype">
+			<property name="displayName" value="sw#p" />
+			<property name="name" value="swsharpp" />
+			<property name="parameterContainer">
+				<ref bean="swsharppparams" />
+			</property>
+			<property name="path" value="/home/data/swsharp/swsharpn/swsharpn" />
+		</bean>
+
+		<!-- add modules to container -->
+		<bean id="moduleContainer" class="hr.fer.zesoi.swsharp.modules.ModuleContainer"
+			scope="prototype">
+			<property name="modules">
+				<list>
+					<ref bean="swsharpn" />
+					<ref bean="swsharpc" />
+					<ref bean="swsharpp" />
+				</list>
+			</property>
+		</bean>
+
+
+		<bean id="multipartResolver"
+			class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+			<!-- one of the properties available; the maximum file size in bytes -->
+			<property name="maxUploadSize" value="100000000" />
+		</bean>
+
+		<bean id="inputDirectory" class="java.io.File" init-method="mkdir">
+			<qualifier value="inputDirectory" />
+			<constructor-arg value="/home/data/webinputs" />
+		</bean>
+	</beans>
+</beans>
