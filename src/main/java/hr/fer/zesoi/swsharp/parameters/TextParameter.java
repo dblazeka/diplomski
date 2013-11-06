@@ -1,5 +1,7 @@
 package hr.fer.zesoi.swsharp.parameters;
 
+import java.io.File;
+
 public class TextParameter implements ModuleParameter {
 	/**
 	 * serves as an id
@@ -10,6 +12,26 @@ public class TextParameter implements ModuleParameter {
 	private String type = "text";
 	private String commandArgumentName;
 	private String commandArgument;
+	private String defaultValue;
+	private boolean hidden = false;
+	private String tooltipText;
+
+
+	public String getTooltipText() {
+		return tooltipText;
+	}
+
+	public void setTooltipText(String tooltipText) {
+		this.tooltipText = tooltipText;
+	}
+
+	public boolean getHidden() {
+		return hidden;
+	}
+
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
+	}
 
 	@Override
 	public String getName() {
@@ -62,6 +84,18 @@ public class TextParameter implements ModuleParameter {
 		}
 	}
 
+	public String getDefaultValue() {
+		return defaultValue;
+	}
 
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
+	}
+
+	@Override
+	public void setCommandArgument(File file) {
+		// TODO Auto-generated method stub
+
+	}
 
 }

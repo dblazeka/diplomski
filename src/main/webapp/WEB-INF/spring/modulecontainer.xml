@@ -21,20 +21,12 @@
 			<property name="displayName" value="Input fasta query file" />
 			<property name="name" value="swsharpni" />
 			<property name="commandArgumentName" value="-i" />
-			<property name="defaultValue"
-				value=">gi|9633069|ref|NC_000898.1| Human herpesvirus 6B, complete genome\nTCCTCGCGTTTCAAAAATTACTTTAAACTCCCCGGGGGGGTTAAAAAAAGGGGGGTATTAACCCTAACCC" />
-			<property name="tooltipText"
-				value="Query file containing list of nucleotides in FASTA format" />
 		</bean>
 		<bean id="swsharpnj" class="hr.fer.zesoi.swsharp.parameters.TextAndFileParameter"
 			scope="prototype">
 			<property name="displayName" value="Input fasta target file" />
 			<property name="name" value="swsharpnj" />
 			<property name="commandArgumentName" value="-j" />
-			<property name="defaultValue"
-				value=">gi|82503188|ref|NC_007605.1| Human herpesvirus 4 type 1, complete genome\nAGAATTCGTCTTGCTCTATTCACCCTTACTTTTCTTCTTGCCCGTTCTCTTTCTTAGTATGAATCCAGTA" />
-			<property name="tooltipText"
-				value="Target file containing list of nucleotides in FASTA format" />
 		</bean>
 		<bean id="swsharpng" class="hr.fer.zesoi.swsharp.parameters.TextParameter"
 			scope="prototype">
@@ -43,8 +35,6 @@
 			<property name="commandArgumentName" value="-g" />
 			<property name="hidden" value="true" />
 			<property name="defaultValue" value="5" />
-			<property name="tooltipText"
-				value="Gap opening penalty, must be given as a positive integer" />
 		</bean>
 		<bean id="swsharpne" class="hr.fer.zesoi.swsharp.parameters.TextParameter"
 			scope="prototype">
@@ -53,8 +43,6 @@
 			<property name="commandArgumentName" value="-e" />
 			<property name="hidden" value="true" />
 			<property name="defaultValue" value="2" />
-			<property name="tooltipText"
-				value="Gap extension penalty, must be given as a positive integer" />
 		</bean>
 		<bean id="swsharpnmatch" class="hr.fer.zesoi.swsharp.parameters.TextParameter"
 			scope="prototype">
@@ -63,8 +51,6 @@
 			<property name="commandArgumentName" value="--match" />
 			<property name="hidden" value="true" />
 			<property name="defaultValue" value="1" />
-			<property name="tooltipText"
-				value="Match score, must be given as a positive integer" />
 		</bean>
 		<bean id="swsharpnmismatch" class="hr.fer.zesoi.swsharp.parameters.TextParameter"
 			scope="prototype">
@@ -73,8 +59,6 @@
 			<property name="commandArgumentName" value="--mismatch" />
 			<property name="hidden" value="true" />
 			<property name="defaultValue" value="-3" />
-			<property name="tooltipText"
-				value="Mismatch penalty, must be given as a negative integer" />
 		</bean>
 
 		<!-- ################ SWsharpNC parameters ########################### -->
@@ -89,16 +73,6 @@
 			<property name="displayName" value="Input fasta target file" />
 			<property name="name" value="swsharpncj" />
 			<property name="commandArgumentName" value="-j" />
-		</bean>
-		<bean id="swsharpnalg" class="hr.fer.zesoi.swsharp.parameters.SelectParameter"
-			scope="prototype">
-			<property name="displayName" value="Alignment algorithm" />
-			<property name="name" value="swsharpnalg" />
-			<property name="commandArgumentName" value="--algorithm" />
-			<property name="options" value="SW, NW, Semi-global" />
-			<property name="defaultValue" value="SW" />
-			<property name="tooltipText"
-				value="Choose betweeen Smith-Waterman, Needleman-Wunsch and semi-global Hybrid-Waterman algorithm" />
 		</bean>
 		<bean id="swsharpncg" class="hr.fer.zesoi.swsharp.parameters.TextParameter"
 			scope="prototype">
@@ -139,30 +113,12 @@
 			<property name="displayName" value="Input fasta query file" />
 			<property name="name" value="swsharppi" />
 			<property name="commandArgumentName" value="-i" />
-			<property name="defaultValue"
-				value=">sp|O74807|YGNG_SCHPO Uncharacterized protein C2D10.16 OS=Schizosaccharomyces pombe (strain 972 / ATCC 24843) GN=SPBC2D10.16 PE=4 SV=2\nMMEEERFKAEIFHVTQEVCNRTASELTESESRNVIVDELFCVGVTEMVWEQIRVLAKDIE\nAFAEHAGRKTVQPQDVLLCCRRNEGLYEIINNFHKESIKSKKKKKENSTT" />
-			<property name="tooltipText"
-				value="Query file containing protein in FASTA format" />
 		</bean>
 		<bean id="swsharppj" class="hr.fer.zesoi.swsharp.parameters.TextAndFileParameter"
 			scope="prototype">
 			<property name="displayName" value="Input fasta target file" />
 			<property name="name" value="swsharppj" />
 			<property name="commandArgumentName" value="-j" />
-			<property name="defaultValue"
-				value=">sp|P19930|HYAD_ECOLI Hydrogenase 1 maturation protease OS=Escherichia coli (strain K12) GN=hyaD PE=3 SV=1\nMSEQRVVVMGLGNLLWADEGFGVRVAERLYAHYHWPEYVEIVDGGTQGLNLLGYVESASH\nLLILDAIDYGLEPGTLRTYAGERIPAYLSAKKMSLHQNSFSEVLALADIRGHLPAHIALV\nGLQPAMLDDYGGSLSELAREQLPAAEQAALAQLAAWGIVPQPANESRCLNYDCLSMENYE\nGVRLRQYRMTQEEQG" />
-			<property name="tooltipText"
-				value="Target file containing protein in FASTA format" />
-		</bean>
-		<bean id="swsharppalg" class="hr.fer.zesoi.swsharp.parameters.SelectParameter"
-			scope="prototype">
-			<property name="displayName" value="Alignment algorithm" />
-			<property name="name" value="swsharppalg" />
-			<property name="commandArgumentName" value="--algorithm" />
-			<property name="options" value="SW, NW, Semi-global" />
-			<property name="defaultValue" value="SW" />
-			<property name="tooltipText"
-				value="Choose betweeen Smith-Waterman, Needleman-Wunsch and semi-global Hybrid-Waterman algorithm" />
 		</bean>
 		<bean id="swsharppg" class="hr.fer.zesoi.swsharp.parameters.TextParameter"
 			scope="prototype">
@@ -171,8 +127,6 @@
 			<property name="commandArgumentName" value="-g" />
 			<property name="hidden" value="true" />
 			<property name="defaultValue" value="10" />
-			<property name="tooltipText"
-				value="Gap opening penalty, must be given as a positive integer" />
 		</bean>
 		<bean id="swsharppe" class="hr.fer.zesoi.swsharp.parameters.TextParameter"
 			scope="prototype">
@@ -181,8 +135,6 @@
 			<property name="commandArgumentName" value="-e" />
 			<property name="hidden" value="true" />
 			<property name="defaultValue" value="2" />
-			<property name="tooltipText"
-				value="Gap extension penalty, must be given as a positive integer" />
 		</bean>
 		<bean id="swsharppm" class="hr.fer.zesoi.swsharp.parameters.SelectParameter"
 			scope="prototype">
@@ -193,77 +145,46 @@
 				value="BLOSUM_45, BLOSUM_50, BLOSUM_62, BLOSUM_80, BLOSUM_90, PAM_30, PAM_70, PAM_250" />
 			<property name="defaultValue" value="BLOSUM_62" />
 			<property name="hidden" value="true" />
-			<property name="tooltipText" value="Substitution matrix used by algorithm" />
 		</bean>
+
 		<!-- ################ SWsharpDB parameters ########################### -->
 		<bean id="swsharpdbi" class="hr.fer.zesoi.swsharp.parameters.TextAndFileParameter"
 			scope="prototype">
-			<property name="displayName" value="Input fasta database query file" />
-			<property name="name" value="swsharpdbi" />
+			<property name="displayName" value="Input fasta query file" />
+			<property name="name" value="swsharppi" />
 			<property name="commandArgumentName" value="-i" />
-			<property name="defaultValue"
-				value=">d1dlwa_ a.1.1.1 (A:) Protozoan/bacterial hemoglobin {Ciliate (Paramecium caudatum) [TaxId: 5885]}\nslfeqlggqaavqavtaqfyaniqadatvatffngidmpnqtnktaaflcaalggpnawt\ngrnlkevhanmgvsnaqfttvighlrsaltgagvaaalveqtvavaetvrgdvvtv" />
-			<property name="tooltipText" value="Database query file in FASTA format" />
 		</bean>
 		<bean id="swsharpdbj" class="hr.fer.zesoi.swsharp.parameters.TextAndFileParameter"
 			scope="prototype">
-			<property name="displayName" value="Input fasta database target file" />
-			<property name="name" value="swsharpdbj" />
+			<property name="displayName" value="Input fasta target file" />
+			<property name="name" value="swsharppj" />
 			<property name="commandArgumentName" value="-j" />
-			<property name="defaultValue"
-				value=">d1dlwa_ a.1.1.1 (A:) Protozoan/bacterial hemoglobin {Ciliate (Paramecium caudatum) [TaxId: 5885]}\nslfeqlggqaavqavtaqfyaniqadatvatffngidmpnqtnktaaflcaalggpnawt\ngrnlkevhanmgvsnaqfttvighlrsaltgagvaaalveqtvavaetvrgdvvtv\n>d2gkma_ a.1.1.1 (A:) Protozoan/bacterial hemoglobin {Mycobacterium tuberculosis, HbN [TaxId: 1773]}\ngllsrlrkrepisiydkiggheaievvvedffvrvladdqlsaffsgtnmsrlkgkqvef\nfaaalggpepytgapmkqvhqgrgitmhhfslvaghladaltaagvpsetiteilgviap\nlavdvts\n>d2qrwa_ a.1.1.1 (A:) Protozoan/bacterial hemoglobin {Mycobacterium tuberculosis, HbO [TaxId: 1773]}\nksfydavggaktfdaivsrfyaqvaedevlrrvypeddlagaeerlrmfleqywggprty\nseqrghprlrmrhapfrislierdaflrcmhtavasidsetlddehrrelldylemaahs\nlvnspf\n>d1s69a_ a.1.1.1 (A:) Protozoan/bacterial hemoglobin {Synechocystis sp. PCC 6803 [TaxId: 1148]}\nstlyeklggttavdlavdkfyervlqddrikhffadvdmakqrahqkafltyafggtdky\ndgrymreahkelvenhglngehfdavaedllatlkemgvpedliaevaavagapahkrdv\nlnq\n>d2bkma_ a.1.1.1 (A:) automated matches {Geobacillus stearothermophilus [TaxId: 1422]}\neqwqtlyeaiggeetvaklveafyrrvaahpdlrpifpddltetahkqkqfltqylggpp\nlytaehghpmlrarhlrfeitpkraeawlacmraamdeiglsgpareqfyhrlvltahhm\nvntpdhld\n>d1asha_ a.1.1.2 (A:) Ascaris hemoglobin, domain 1 {Pig roundworm (Ascaris suum) [TaxId: 6253]}\nanktrelcmkslehakvdtsnearqdgidlykhmfenypplrkyfksreeytaedvqndp\nffakqgqkillachvlcatyddretfnaytrelldrhardhvhmppevwtdfwklfeeyl\ngkkttldeptkqawheigrefakeink\n>d1urva_ a.1.1.2 (A:) Cytoglobin {Human (Homo sapiens) [TaxId: 9606]}\nelseaerkavqamwarlyansedvgvailvrffvnfpsakqyfsqfkhmedplemerspq\nlrkhasrvmgalntvvenlhdpdkvssvlalvgkahalkhkvepvyfkilsgvilevvae\nefasdfppetqrawaklrgliyshvtaaykevgw" />
-			<property name="tooltipText" value="Database target file in FASTA format" />
 		</bean>
 		<bean id="swsharpdbg" class="hr.fer.zesoi.swsharp.parameters.TextParameter"
 			scope="prototype">
 			<property name="displayName" value="Gap opening penalty" />
-			<property name="name" value="swsharpdbg" />
+			<property name="name" value="swsharppg" />
 			<property name="commandArgumentName" value="-g" />
 			<property name="hidden" value="true" />
 			<property name="defaultValue" value="10" />
-			<property name="tooltipText"
-				value="Gap opening penalty, must be given as a positive integer" />
 		</bean>
 		<bean id="swsharpdbe" class="hr.fer.zesoi.swsharp.parameters.TextParameter"
 			scope="prototype">
 			<property name="displayName" value="Gap extension penalty" />
-			<property name="name" value="swsharpdbe" />
+			<property name="name" value="swsharppe" />
 			<property name="commandArgumentName" value="-e" />
 			<property name="hidden" value="true" />
-			<property name="defaultValue" value="1" />
-			<property name="tooltipText"
-				value="Gap extension penalty, must be given as a positive integer and must be less or equal to gap opening penalty" />
+			<property name="defaultValue" value="2" />
 		</bean>
 		<bean id="swsharpdbm" class="hr.fer.zesoi.swsharp.parameters.SelectParameter"
 			scope="prototype">
 			<property name="displayName" value="Substitution matrix" />
-			<property name="name" value="swsharpdbm" />
-			<property name="commandArgumentName" value="--matrix" />
+			<property name="name" value="swsharppm" />
+			<property name="commandArgumentName" value="-m" />
 			<property name="options"
-				value="BLOSUM_45, BLOSUM_50, BLOSUM_62, BLOSUM_80, BLOSUM_90, BLOSUM_30, BLOSUM_70, BLOSUM_250, EDNA_FULL" />
+				value="BLOSUM_45, BLOSUM_50, BLOSUM_62, BLOSUM_80, BLOSUM_90, PAM_30, PAM_70, PAM_250" />
 			<property name="defaultValue" value="BLOSUM_62" />
 			<property name="hidden" value="true" />
-			<property name="tooltipText" value="Similarity matrix used by algorithm" />
-		</bean>
-		<bean id="swsharpdbevalue" class="hr.fer.zesoi.swsharp.parameters.TextParameter"
-			scope="prototype">
-			<property name="displayName" value="Evalue threshold" />
-			<property name="name" value="swsharpdbevalue" />
-			<property name="commandArgumentName" value="--evalue" />
-			<property name="hidden" value="true" />
-			<property name="defaultValue" value="10.0" />
-			<property name="tooltipText"
-				value="Evalue threshold, alignments with higher evalue are filtered, must be given as a positive float" />
-		</bean>
-		<bean id="swsharpdbmaxaligns" class="hr.fer.zesoi.swsharp.parameters.TextParameter"
-			scope="prototype">
-			<property name="displayName" value="Maximum number of alignments" />
-			<property name="name" value="swsharpdbmaxaligns" />
-			<property name="commandArgumentName" value="--max-aligns" />
-			<property name="hidden" value="true" />
-			<property name="defaultValue" value="10" />
-			<property name="tooltipText"
-				value="maximum number of alignments to be shown in results" />
 		</bean>
 
 		<!-- setup parameter containers -->
@@ -273,7 +194,6 @@
 				<list>
 					<ref bean="swsharpni" />
 					<ref bean="swsharpnj" />
-					<ref bean="swsharpnalg" />
 					<ref bean="swsharpng" />
 					<ref bean="swsharpne" />
 					<ref bean="swsharpnmatch" />
@@ -300,7 +220,6 @@
 				<list>
 					<ref bean="swsharppi" />
 					<ref bean="swsharppj" />
-					<ref bean="swsharppalg" />
 					<ref bean="swsharppg" />
 					<ref bean="swsharppe" />
 					<ref bean="swsharppm" />
@@ -316,8 +235,7 @@
 					<ref bean="swsharpdbg" />
 					<ref bean="swsharpdbe" />
 					<ref bean="swsharpdbm" />
-					<ref bean="swsharpdbevalue" />
-					<ref bean="swsharpdbmaxaligns" />
+
 				</list>
 			</property>
 		</bean>
@@ -332,10 +250,6 @@
 				<ref bean="swsharpnparams" />
 			</property>
 			<property name="path" value="swsharpn" />
-			<property name="complementOption">
-				<value type="java.lang.Boolean">true</value>
-			</property>
-			<property name="complementPath" value="swsharpnc" />
 		</bean>
 		<bean id="swsharpnc" class="hr.fer.zesoi.swsharp.modules.Module"
 			scope="prototype">
@@ -353,7 +267,7 @@
 			<property name="parameterContainer">
 				<ref bean="swsharpparams" />
 			</property>
-			<property name="path" value="swsharpp" />
+			<property name="path" value="/home/data/swsharp/swsharpn/swsharpp" />
 		</bean>
 		<bean id="swsharpdb" class="hr.fer.zesoi.swsharp.modules.Module"
 			scope="prototype">
@@ -362,83 +276,10 @@
 			<property name="parameterContainer">
 				<ref bean="swsharpdbarams" />
 			</property>
-			<property name="path" value="swsharpdb" />
-			<property name="usesDumpFile">
-				<value type="java.lang.Boolean">false</value>
-			</property>
-			<property name="usesDatabase">
-				<value type="java.lang.Boolean">true</value>
-			</property>
-			<property name="databaseContainer">
-				<ref bean="dbContainer" />
-			</property>
+			<property name="path" value="swsharpn" />
 		</bean>
 
 
-		<!-- ########################################setup dbs############### -->
-		<bean id="uniprotdb" class="hr.fer.zesoi.swsharp.databases.Database"
-			scope="prototype">
-			<property name="name" value="UniProtKB/Swiss-Prot" />
-			<property name="path" value="/home/data/swissprot.fasta" />
-		</bean>
-		<bean id="patdb" class="hr.fer.zesoi.swsharp.databases.Database"
-			scope="prototype">
-			<property name="name" value="Patented protein sequences" />
-			<property name="path" value="/home/data/pataa.fasta" />
-		</bean>
-		<bean id="pdbdb" class="hr.fer.zesoi.swsharp.databases.Database"
-			scope="prototype">
-			<property name="name" value="Protein Data Bank proteins" />
-			<property name="path" value="/home/data/pdbaa.fasta" />
-		</bean>
-		<bean id="envnrdb" class="hr.fer.zesoi.swsharp.databases.Database"
-			scope="prototype">
-			<property name="name" value="Metagenomic proteins" />
-			<property name="path" value="/home/data/env_nr.fasta" />
-		</bean>
-		<bean id="astraldb" class="hr.fer.zesoi.swsharp.databases.Database"
-			scope="prototype">
-			<property name="name" value="Astral" />
-			<property name="path" value="/home/data/astral.fasta" />
-		</bean>
 
-		<bean id="dbContainer" class="hr.fer.zesoi.swsharp.databases.DatabaseContainer"
-			scope="prototype">
-			<property name="databases">
-				<list>
-					<ref bean="uniprotdb" />
-					<ref bean="patdb" />
-					<ref bean="pdbdb" />
-					<ref bean="envnrdb" />
-					<ref bean="astraldb" />
-				</list>
-			</property>
-		</bean>
-
-		<!-- add modules to container -->
-		<bean id="moduleContainer" class="hr.fer.zesoi.swsharp.modules.ModuleContainer"
-			scope="prototype">
-			<property name="modules">
-				<list>
-					<ref bean="swsharpn" />
-					<!-- <ref bean="swsharpnc" /> -->
-					<ref bean="swsharpp" />
-					<ref bean="swsharpdb" />
-				</list>
-			</property>
-		</bean>
-
-
-		<bean id="multipartResolver"
-			class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-
-			<!-- one of the properties available; the maximum file size in bytes -->
-			<property name="maxUploadSize" value="100000000" />
-		</bean>
-
-		<bean id="inputDirectory" class="java.io.File" init-method="mkdir">
-			<qualifier value="inputDirectory" />
-			<constructor-arg value="/home/data/webinputs" />
-		</bean>
 	</beans>
 </beans>

@@ -24,17 +24,30 @@ public class ModuleExecutor {
 			throw new IllegalStateException(
 					"Module has to be prepared before execution");
 		}
-		File outputFile = new File(dir, "dump");
 		List<String> command = module.getCommand();
-		CommandBuilder.setOutputLocation(command, outputFile.getAbsolutePath());
-		CommandBuilder.setOutputFormat(command, "dump");
 
-		processBuilderService.runCommand(command);
-		createPairStatFile(dir, outputFile);
-		createPlotFile(dir, outputFile);
-		System.out.println("finished");
+		if (module.usesDumpFile()) {
+			File outputFile = new File(dir, "dump");
+			CommandBuilder.setOutputLocation(command,
+					outputFile.getAbsolutePath());
+			CommandBuilder.setOutputFormat(command, "dump");
 
-		//indicates finished
+			processBuilderService.runCommand(command);
+			createPairStatFile(dir, outputFile);
+			createPlotFile(dir, outputFile);
+			System.out.println("finished");
+		} else {
+			File outputFile = new File(dir, "pairstat");
+			CommandBuilder.setOutputLocation(command,
+					outputFile.getAbsolutePath());
+			for(String s : command){
+				System.out.println(s);
+			}
+			processBuilderService.runCommand(command);
+			System.out.println("finished");
+		}
+
+		// indicates finished
 		File finished = new File(dir.getAbsolutePath(), "finished");
 		System.out.println(finished.getAbsolutePath());
 		System.out.println(finished.createNewFile());

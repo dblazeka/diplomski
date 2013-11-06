@@ -3,11 +3,12 @@ package hr.fer.zesoi.swsharp.parameters;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.multipart.MultipartFile;
 
-public class FileParameter implements ModuleParameter {
+public class TextAndFileParameter implements ModuleParameter {
 	/**
 	 * serves as an id
 	 */
@@ -18,12 +19,14 @@ public class FileParameter implements ModuleParameter {
 	private File inputDirectory;
 
 	private String displayName;
-	private String type = "file";
+	private String type = "textfile";
 	private String commandArgumentName;
 	private File file;
 	private boolean hidden = false;
+	private String textSuffix = "text";
+	private String fileSuffix = "file";
 	private String tooltipText;
-
+	private String defaultValue;
 
 	public String getTooltipText() {
 		return tooltipText;
@@ -31,6 +34,22 @@ public class FileParameter implements ModuleParameter {
 
 	public void setTooltipText(String tooltipText) {
 		this.tooltipText = tooltipText;
+	}
+
+	public String getTextSuffix() {
+		return textSuffix;
+	}
+
+	public void setTextSuffix(String textSuffix) {
+		this.textSuffix = textSuffix;
+	}
+
+	public String getFileSuffix() {
+		return fileSuffix;
+	}
+
+	public void setFileSuffix(String fileSuffix) {
+		this.fileSuffix = fileSuffix;
 	}
 
 	public boolean getHidden() {
@@ -69,6 +88,10 @@ public class FileParameter implements ModuleParameter {
 	public String getCommandArgument() {
 		return file.getAbsolutePath();
 	}
+	@Override
+	public void setCommandArgument(File file) {
+		this.file = file;
+	}
 
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
@@ -80,9 +103,7 @@ public class FileParameter implements ModuleParameter {
 
 	@Override
 	public void setValue(Object value) {
-		if (!(value instanceof MultipartFile)) {
-			throw new IllegalArgumentException("Argument should be a file");
-		} else {
+		if (value instanceof MultipartFile) {
 
 			MultipartFile multipartFile = (MultipartFile) value;
 			try {
@@ -94,6 +115,19 @@ public class FileParameter implements ModuleParameter {
 				e.printStackTrace();
 			}
 
+		} else if (value instanceof String) {
+			try {
+				file = File.createTempFile("swsharp", null, inputDirectory);
+				System.out.println("Text je " + value);
+				System.out.println(file.getAbsolutePath());
+				FileUtils.writeStringToFile(file, (String) value);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			throw new IllegalArgumentException(
+					"Argument should be a file or a string.");
 		}
 
 	}
@@ -101,21 +135,13 @@ public class FileParameter implements ModuleParameter {
 	@Override
 	public String getDefaultValue() {
 		// TODO intentionally blank
-		return null;
+		return defaultValue;
 	}
 
 	@Override
 	public void setDefaultValue(String value) {
-		// TODO intentionally blank
+		this.defaultValue = value;
 
 	}
-
-	@Override
-	public void setCommandArgument(File file) {
-		// TODO Auto-generated method stub
-
-	}
-
-
 
 }

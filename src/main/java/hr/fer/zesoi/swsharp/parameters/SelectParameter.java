@@ -1,29 +1,21 @@
 package hr.fer.zesoi.swsharp.parameters;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.multipart.MultipartFile;
-
-public class FileParameter implements ModuleParameter {
+public class SelectParameter implements ModuleParameter {
 	/**
 	 * serves as an id
 	 */
 	private String name;
 
-	@Autowired
-	@Qualifier("inputDirectory")
-	private File inputDirectory;
-
 	private String displayName;
-	private String type = "file";
+	private String type = "select";
 	private String commandArgumentName;
-	private File file;
+	private String commandArgument;
+	private String[] options;
+	private String defaultValue;
 	private boolean hidden = false;
 	private String tooltipText;
-
 
 	public String getTooltipText() {
 		return tooltipText;
@@ -39,6 +31,22 @@ public class FileParameter implements ModuleParameter {
 
 	public void setHidden(boolean hidden) {
 		this.hidden = hidden;
+	}
+
+	public String getDefaultValue() {
+		return defaultValue;
+	}
+
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
+	}
+
+	public String[] getOptions() {
+		return options;
+	}
+
+	public void setOptions(String[] options) {
+		this.options = options;
 	}
 
 	@Override
@@ -67,7 +75,7 @@ public class FileParameter implements ModuleParameter {
 
 	@Override
 	public String getCommandArgument() {
-		return file.getAbsolutePath();
+		return commandArgument;
 	}
 
 	public void setDisplayName(String displayName) {
@@ -78,36 +86,24 @@ public class FileParameter implements ModuleParameter {
 		this.commandArgumentName = commandArgumentName;
 	}
 
+	public void setCommandArgument(String commandArgument) {
+		this.commandArgument = commandArgument;
+	}
+
 	@Override
 	public void setValue(Object value) {
-		if (!(value instanceof MultipartFile)) {
-			throw new IllegalArgumentException("Argument should be a file");
+		// TODO Auto-generated method stub
+		if (!(value instanceof String)) {
+			throw new IllegalArgumentException(
+					"Object passed should be a string");
 		} else {
-
-			MultipartFile multipartFile = (MultipartFile) value;
-			try {
-				file = File.createTempFile("swsharp", null, inputDirectory);
-				System.out.println(file.getAbsolutePath());
-				multipartFile.transferTo(file);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			String stringValue = (String) value;
+			if (stringValue.equals("Semi-global")) {
+				this.commandArgument = "HW";
+			} else {
+				this.commandArgument = stringValue;
 			}
-
 		}
-
-	}
-
-	@Override
-	public String getDefaultValue() {
-		// TODO intentionally blank
-		return null;
-	}
-
-	@Override
-	public void setDefaultValue(String value) {
-		// TODO intentionally blank
-
 	}
 
 	@Override
@@ -115,7 +111,5 @@ public class FileParameter implements ModuleParameter {
 		// TODO Auto-generated method stub
 
 	}
-
-
 
 }

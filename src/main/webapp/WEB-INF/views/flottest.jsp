@@ -5,9 +5,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Flot Examples: Navigation</title>
+<title>Results</title>
 <link href="/zesoi/resources/js/flot/examples/examples.css"
 	rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/zesoi/resources/css/bootstrap.min.css">
+<style>
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+</style>
+<style type="text/css">
+.data { white-space: pre; }
+</style>
+<link rel="stylesheet" href="/resources/js/flot/examples/examples.css">
+
+
 <style type="text/css">
 #placeholder .button {
 	position: absolute;
@@ -21,10 +34,7 @@
 	padding: 2px;
 }
 
-.message {
-	padding-left: 50px;
-	font-size: smaller;
-}
+
 </style>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../../excanvas.min.js"></script><![endif]-->
 <script language="javascript" type="text/javascript"
@@ -33,6 +43,8 @@
 	src="/zesoi/resources/js/flot/jquery.flot.js"></script>
 <script language="javascript" type="text/javascript"
 	src="/zesoi/resources/js/flot/jquery.flot.navigate.js"></script>
+<script language="javascript" type="text/javascript"
+	src="/zesoi/resources/js/vendor/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 
@@ -87,20 +99,10 @@
 
 		placeholder.bind("plotpan", function(event, plot) {
 			var axes = plot.getAxes();
-			$(".message").html(
-					"Panning to x: " + axes.xaxis.min.toFixed(2) + " &ndash; "
-							+ axes.xaxis.max.toFixed(2) + " and y: "
-							+ axes.yaxis.min.toFixed(2) + " &ndash; "
-							+ axes.yaxis.max.toFixed(2));
 		});
 
 		placeholder.bind("plotzoom", function(event, plot) {
 			var axes = plot.getAxes();
-			$(".message").html(
-					"Zooming to x: " + axes.xaxis.min.toFixed(2) + " &ndash; "
-							+ axes.xaxis.max.toFixed(2) + " and y: "
-							+ axes.yaxis.min.toFixed(2) + " &ndash; "
-							+ axes.yaxis.max.toFixed(2));
 		});
 
 		// add zoom out button
@@ -140,40 +142,63 @@
 
 		// Add the Flot version string to the footer
 
-		$("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
 	});
 </script>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width">
+
+
 </head>
 <body>
-
-	<div id="header">
-		<h2>Navigation</h2>
-	</div>
-
-	<div id="content">
-
-		<div class="demo-container">
-			<div id="placeholder" class="demo-placeholder"></div>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="http://161.53.64.233:8080/zesoi">SW#</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<c:forEach items="${ allModules }" var="module">
+								<li><a href="http://161.53.64.233:8080/zesoi/${ module.name }">${ module.displayName }</a></li>
+						</c:forEach>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
 		</div>
-
-		<p class="message"></p>
-
-		<p>With the navigate plugin it is easy to add panning and zooming.
-			Drag to pan, double click to zoom (or use the mouse scrollwheel).</p>
-
-		<p>The plugin fires events (useful for synchronizing several
-			plots) and adds a couple of public methods so you can easily build a
-			little user interface around it, like the little buttons at the top
-			right in the plot.</p>
-
-
-		<c:forEach items="${ points }" var="point">
-			<p>${point.x} ${point.y}</p>
-		</c:forEach>
 	</div>
+	<div class="container">
 
-	<div id="footer">Copyright &copy; 2007 - 2013 IOLA and Ole
-		Laursen</div>
+		<!-- Example row of columns -->
+		<div class="row-fluid">
+
+
+
+			<div id="content">
+				<ul id="myTab" class="nav nav-tabs">
+					<li class="active"><a href="#pairstat" data-toggle="tab">Result</a></li>
+					<c:if test="${ drawchart }">
+					<li class><a href="#flot" data-toggle="tab">Chart</a></li>
+					</c:if>
+				</ul>
+				<div id="myTabContent" class="tab-content">
+					<div class="tab-pane fade active in" id="pairstat">
+						<div class="text-right">
+						<a href="http://161.53.64.233:8080/zesoi/download?jobId=${ jobId }">Download results</a>
+						<br>
+						</div>
+						${ pairstat }
+					</div>
+
+					<div class="demo-container tab tab-pane fade" id="flot">
+						<div id="placeholder" class="demo-placeholder"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

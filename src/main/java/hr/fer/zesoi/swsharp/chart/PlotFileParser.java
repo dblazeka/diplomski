@@ -14,6 +14,9 @@ public class PlotFileParser {
 	public List<Point> parsePoints(File resultDir) throws IOException {
 		File plotFile = new File(resultDir.getAbsolutePath() + "/plot");
 		List<Point> result = new ArrayList<Point>();
+		if(!plotFile.exists()){
+			return result;
+		}
 		BufferedReader br = new BufferedReader(new FileReader(plotFile));
 		String line;
 		String[] split;

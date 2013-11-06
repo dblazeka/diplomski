@@ -24,7 +24,11 @@ body {
 <link rel="stylesheet" href="resources/css/bootstrap-responsive.min.css">
 <link rel="stylesheet" href="resources/css/main.css">
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="resources/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<script
+	src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+
 </head>
 <body>
 	<!--[if lt IE 7]>
@@ -39,7 +43,7 @@ body {
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="#">SW#</a>
+				</a> <a class="brand" href="/zesoi">SW#</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<c:forEach items="${ allModules }" var="module">
@@ -67,23 +71,176 @@ body {
 				enctype="multipart/form-data">
 				<div class="span6 offset3">
 					<fieldset>
-						<legend>Input parameters</legend>
+						<legend>${ module.name }</legend>
 						<div class="control-group">
 							<c:forEach items="${ moduleParameters }" var="parameter">
-								<label class="control-label" for="input01">${
-									parameter.displayName }</label>
-								<div class="controls">
-									<input type="${ parameter.type }" class="input-xlarge"
-										name="${ parameter.name }" />
-								</div>
+									<script type="text/javascript">
+										$(document).ready(function() {
+											$("#${ parameter.name }").tooltip({
+												'selector' : '',
+												'placement' : 'top',
+												'title' : "${ parameter.tooltipText }",
+												container: 'body'
+											});
+
+											console.log('yaddda');
+										});
+									</script>
+								<c:if test="${ !parameter.hidden }">
+									<c:if
+										test="${parameter.type == 'text' || parameter.type == 'file'}">
+										<label class="control-label" for="${ parameter.name }" id="${ parameter.name }">${
+											parameter.displayName }</label>
+										<div class="controls">
+											<input type="${ parameter.type }" class="input-xlarge"
+												name="${ parameter.name } "
+												value="${ parameter.defaultValue }" />
+										</div>
+									</c:if>
+
+									<c:if test="${parameter.type == 'select' }">
+										<label class="control-label" for="${ parameter.name }" id="${ parameter.name }">${
+											parameter.displayName }</label>
+										<div class="controls">
+											<select name="${ parameter.name } ">
+												<c:forEach items="${ parameter.options }" var="option">
+													<c:if test="${parameter.defaultValue == option }">
+														<option value="${ option }" selected>${ option }</option>
+													</c:if>
+													<c:if test="${parameter.defaultValue != option }">
+														<option value="${ option }">${ option }</option>
+													</c:if>
+												</c:forEach>
+											</select>
+										</div>
+									</c:if>
+									<c:if test="${parameter.type == 'textfile' }">
+										<label class="control-label" for="${ parameter.name }" id="${ parameter.name }">${
+											parameter.displayName }</label>
+										<div class="controls">
+											<textarea rows="7" cols="47"
+												name="${ parameter.name }${ parameter.textSuffix }"
+												class="span12"
+												id="${ parameter.name }${ parameter.textSuffix }"
+												></textarea>
+											<input type="file" class="input-xlarge"
+												name="${ parameter.name }${ parameter.fileSuffix }" />
+											<a href="#" id="${ parameter.name }fill">Fill sample</a>
+											<script type="text/javascript">
+											$(document).ready(function() {
+												$("#${ parameter.name }fill" ).click(function() {
+													$("#${ parameter.name }${ parameter.textSuffix }").val("${ parameter.defaultValue }");
+
+													console.log('yaddda');
+												});
+											});
+											</script>
+										</div>
+									</c:if>
+								</c:if>
 							</c:forEach>
+							<c:if test="${ module.usesDatabase }">
+							<label class="control-label" for="database" id="database">Target database</label>
+														<div class="controls">
+															<select name="database">
+																		<option value="none" selected>None</option>
+																<c:forEach items="${ module.databases }" var="db">
+																		<option value="${ db.name }">${ db.name }</option>
+																</c:forEach>
+															</select>
+														</div>
+														<script type="text/javascript">
+										$(document).ready(function() {
+											$("#database").tooltip({
+												'selector' : '',
+												'placement' : 'top',
+												'title' : "Use existing database as target",
+												container: 'body'
+											});
+
+											console.log('yaddda');
+										});
+									</script>
+
+							</c:if>
+
+							<c:if test="${ module.complementOption }">
+								<label class="checkbox" id="complement">
+									<input type="checkbox" name="complement" value="complement">
+									Calculate for complement
+								</label>
+								<script type="text/javascript">
+										$(document).ready(function() {
+											$("#complement").tooltip({
+												'selector' : '',
+												'placement' : 'top',
+												'title' : "Take complements into consideration while performing aligment",
+												container: 'body'
+											});
+
+											console.log('yaddda');
+										});
+									</script>
+							</c:if>
+
+							<div class="accordion" id="accordion2">
+								<div class="accordion-group">
+									<div class="accordion-heading">
+										<a class="accordion-toggle" data-toggle="collapse"
+											data-parent="#accordion2" href="#collapseOne"> <i
+											class="icon-chevron-right"></i> Additional options
+										</a>
+									</div>
+									<div id="collapseOne" class="accordion-body collapse in">
+										<div class="accordion-inner">
+											<c:forEach items="${ moduleParameters }" var="parameter">
+												<c:if test="${ parameter.hidden }">
+													<c:if
+														test="${parameter.type == 'text' || parameter.type == 'file'}">
+														<label class="control-label" for="${ parameter.name }" id="${ parameter.name }">${
+															parameter.displayName }</label>
+														<div class="controls">
+															<input type="${ parameter.type }" class="input-xlarge"
+																name="${ parameter.name } "
+																value="${ parameter.defaultValue }" />
+														</div>
+													</c:if>
+													<c:if test="${parameter.type == 'select' }">
+														<label class="control-label" for="${ parameter.name }" id="${ parameter.name }">${
+															parameter.displayName }</label>
+														<div class="controls">
+															<select name="${ parameter.name } ">
+																<c:forEach items="${ parameter.options }" var="option">
+																	<c:if test="${parameter.defaultValue == option }">
+																		<option value="${ option }" selected>${
+																			option }</option>
+																	</c:if>
+																	<c:if test="${parameter.defaultValue != option }">
+																		<option value="${ option }">${ option }</option>
+																	</c:if>
+																</c:forEach>
+															</select>
+														</div>
+													</c:if>
+												</c:if>
+											</c:forEach>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="controls">
+								<label class="checkbox"> <input type="checkbox"
+									name="sendEmail" value="send"> Notify me by e-mail when
+									done
+								</label> <label for="email">E-mail</label> <input type="email"
+									name="email" class="span9" />
+							</div>
 						</div>
-						<input type="submit" value="Submit" />
+						<input type="submit" value="Submit" class="btn btn-primary" />
 					</fieldset>
 				</div>
 			</form>
 		</div>
-
 		<hr>
 
 		<footer>
@@ -93,8 +250,6 @@ body {
 	</div>
 	<!-- /container -->
 
-	<script
-		src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script>
 		window.jQuery
 				|| document
